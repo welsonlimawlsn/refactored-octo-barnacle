@@ -1,0 +1,17 @@
+<hr-partida [partida]="partida"></hr-partida>
+
+<h1>Duelos</h1>
+
+<div class="row">
+  <div class="col-6" *ngFor="let duelo of duelos">
+    <h6>{{duelo.personagemUm.nome}} vs {{duelo.personagemDois.nome}} - {{duelo.habilidadeComparada}}</h6>
+    <div class="row">
+      <div class="col-6">
+        <hr-personagem [personagem]="duelo.personagemUm" [class.text-success]="duelo.personagemUm.nome === duelo.ganhador.nome"></hr-personagem>
+      </div>
+      <div class="col-6">
+        <hr-personagem [personagem]="duelo.personagemDois" [class.text-success]="duelo.personagemDois.nome === duelo.ganhador.nome"></hr-personagem>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="heroisDS" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/heroisDS</jta-data-source>
+        <class>com.stefanini.herois.personagem.entity.Personagem</class>
+        <class>com.stefanini.herois.partida.entity.Partida</class>
+        <class>com.stefanini.herois.duelo.entity.Duelo</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

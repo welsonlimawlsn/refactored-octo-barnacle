@@ -1,0 +1,6 @@
+<button (click)="novaPartida()" class="btn btn-primary">Nova partida</button>
+<div *ngIf="partida">
+  <h1>Partida feita com sucesso!</h1>
+  <h2>Resultado</h2>
+  <hr-partida [partida]="partida" [link]="true"></hr-partida>
+</div>

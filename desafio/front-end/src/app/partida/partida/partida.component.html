@@ -1,0 +1,13 @@
+<div class="row" *ngIf="partida">
+  <div class="col">
+    <hr-personagem [personagem]="partida.ganhador" titulo="Ganhador"></hr-personagem>
+  </div>
+  <div class="col">
+    <hr-personagem [personagem]="partida.heroiMutante" titulo="Heroi Mutante"></hr-personagem>
+  </div>
+</div>
+
+<div class="row" *ngIf="link && partida">
+  <a [routerLink]="['/', 'partida', partida.id]" class="btn btn-secondary">Ver detalhes</a>
+</div>
+
