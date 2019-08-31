@@ -47,8 +47,30 @@ public class Personagem extends AbstractEntity {
     @Transient
     private Integer numeroDeVitorias = 0;
 
+    public Personagem duela(Personagem personagem, Habilidade habilidade) throws EmpateException, DueloImpossivelException {
+        verificaPossibilidadeDeAlguemGanhar(personagem);
+
+        Integer valorHabilidadePersonagem1 = this.getHabilidade(habilidade);
+        Integer valorHabilidadePersonagem2 = personagem.getHabilidade(habilidade);
+
+        int resultado = valorHabilidadePersonagem1.compareTo(valorHabilidadePersonagem2);
+
+        verificaSeOuveEmpate(resultado);
+
+        return processaGanhador(personagem, habilidade, resultado);
+    }
+
+    public void combinaHabilidades(Personagem personagem) {
+        for (Habilidade habilidade : Habilidade.values()) {
+            Integer habilidadePersonagem = personagem.getHabilidade(habilidade);
+            if (habilidadePersonagem > this.getHabilidade(habilidade)) {
+                this.setHabilidade(habilidade, habilidadePersonagem);
+            }
+        }
+    }
+
     @Transient
-    public Integer getHabilidade(Habilidade habilidade) {
+    private Integer getHabilidade(Habilidade habilidade) {
         switch (habilidade) {
             case INTELIGENCIA:
                 return inteligencia;
@@ -65,19 +87,6 @@ public class Personagem extends AbstractEntity {
             default:
                 return null;
         }
-    }
-
-    public Personagem duela(Personagem personagem, Habilidade habilidade) throws EmpateException, DueloImpossivelException {
-        verificaPossibilidadeDeAlguemGanhar(personagem);
-
-        Integer valorHabilidadePersonagem1 = this.getHabilidade(habilidade);
-        Integer valorHabilidadePersonagem2 = personagem.getHabilidade(habilidade);
-
-        int resultado = valorHabilidadePersonagem1.compareTo(valorHabilidadePersonagem2);
-
-        verificaSeOuveEmpate(resultado);
-
-        return processaGanhador(personagem, habilidade, resultado);
     }
 
     private Personagem processaGanhador(Personagem personagem, Habilidade habilidade, int resultado) {
@@ -98,7 +107,7 @@ public class Personagem extends AbstractEntity {
         }
     }
 
-    public void verificaPossibilidadeDeAlguemGanhar(Personagem personagem) throws DueloImpossivelException {
+    private void verificaPossibilidadeDeAlguemGanhar(Personagem personagem) throws DueloImpossivelException {
         int count = 0;
         for (Habilidade habilidade : Habilidade.values()) {
             if (this.getHabilidade(habilidade).equals(personagem.getHabilidade(habilidade))) {
@@ -141,15 +150,6 @@ public class Personagem extends AbstractEntity {
             case DEFESA:
                 defesa = novoValor;
                 break;
-        }
-    }
-
-    public void combinaHabilidades(Personagem personagem) {
-        for (Habilidade habilidade : Habilidade.values()) {
-            Integer habilidadePersonagem = personagem.getHabilidade(habilidade);
-            if (habilidadePersonagem > this.getHabilidade(habilidade)) {
-                this.setHabilidade(habilidade, habilidadePersonagem);
-            }
         }
     }
 }
