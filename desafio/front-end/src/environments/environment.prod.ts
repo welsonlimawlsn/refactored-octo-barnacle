@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/herois/api'
+  apiUrl: 'https://localhost:8443/herois/api'
 };
